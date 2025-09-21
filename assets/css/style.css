@@ -1,0 +1,227 @@
+.mynav-bar{
+    background: none;
+    
+}
+.nav-item a{
+    font-weight: 500;
+}
+.navbar{
+    padding: 1rem 0;
+    background-color: #fff; /* Clean white background */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* subtle shadow */
+    z-index: 1000;
+    
+}
+
+.nav-item a {
+  font-weight: 500;
+  color: #444;
+  transition: color 0.3s ease;
+}
+
+.nav-item a:hover,
+.home-link {
+  color: #ff6f9c; /* A soft rose/pink shade */
+}
+
+.home-link{
+    color: rgb(255, 117, 163);
+}
+.signin{
+    background: #ff6f9c;
+    color: #fff;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 25px; /* Makes it fully rounded */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.signin:hover {
+  background: #ff4f88; /* Slightly darker pink on hover */
+  transform: translateY(-2px);
+}
+/* Sticky navbar fix for top spacing */
+body {
+  padding-top: 80px; /* adjust if navbar height changes */
+}
+.card{
+    background: none;
+    border: none;
+}
+
+.hero{
+    background: rgb(255, 151, 169);
+    min-height: 680px;
+    display: flex;
+    align-items: center;
+    /* position: relative; */
+    overflow: hidden;
+    /* padding: 80px 0; 🌸 Added vertical padding */
+}
+
+/* LEFT TEXT */
+.text-card .card-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  /* color: #fff; */
+  line-height: 1.2;
+}
+
+.text-card .card-text {
+  font-size: 1.2rem;
+  /* color: #fff; */
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* BUTTONS */
+.started,
+.consultation {
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+  border: none;
+}
+
+.started {
+  background: #ff4f88;
+  color: #fff;
+}
+
+.started:hover {
+  background: #ffe3ec;
+  transform: translateY(-2px);
+}
+
+.consultation {
+  background: #ff6f9c;
+  /* color: #fff; */
+}
+
+.consultation:hover {
+  background: #ff4f88;
+  transform: translateY(-2px);
+}
+
+/* IMAGE */
+.image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;  /* align image at bottom */
+  height: 100%;
+  padding-bottom: 0;   /* remove extra bottom space */
+  margin-bottom: -53px; /* pull down past Bootstrap gutter */
+}
+.hero .col-md-6 {
+  display: flex;          /* make both columns stretch equal height */
+  flex-direction: column;
+}
+.hero-img {
+  max-width: 100%;
+  height: auto;
+  /* position: absolute; */
+  /* bottom: 0; */
+    transform: scale(1.15);       /* enlarge by 15% */
+  transform-origin: bottom;     /* grow from bottom up */
+}
+
+/*About section*/
+.about{
+    height: 90vh;
+    padding-top: 80px;
+}
+.about-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;  /* 🌸 smooth rounded edges*/
+  object-fit: cover;   /* ensures it fills nicely */ 
+}
+.about-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ff6f9c;
+}
+.about .card-text{
+  font-weight: 500;
+  font-size: 17px;
+}
+
+
+.icon-wrapper {
+  background: #ff97a9;         /* pink background */
+  color: #fff;                 /* white icon color */
+  border-radius: 50%;          /* make it circular */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;              /* makes the icon itself big */
+  
+}
+
+.feature-box {
+  width: 45%;                   /* make two fit side by side */
+}
+
+.learn-more-btn {
+  background: #ff97a9;         /* brand pink */
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;          /* fully rounded */
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background 0.3s ease;
+}
+
+.learn-more-btn:hover {
+  background: #ff7b94;          /* slightly darker on hover */
+}
+
+/*Services*/
+.services {
+  background: #fff7f9; /* very soft pink background */
+}
+
+.services-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ff7b94;
+}
+
+.services-subtitle {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #555;
+}
+.service-card{
+  border: 2px solid #f8c2d6; /* light pink border */
+  border-radius: 12px;
+  padding: 1.5rem; /* 🌸 extra internal spacing */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card .card-body {
+  padding: 0; /* reset bootstrap default to avoid double-padding */
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-card .icon-wrapper {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffe6ef; /* soft pink */
+  color: #d63384; /* pink text */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+}
