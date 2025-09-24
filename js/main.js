@@ -2,17 +2,18 @@ const doctorsPath = "http://localhost:3000/doctors";
 const container = document.getElementById("doctors-grid");
 const navContainer = document.getElementById("booking-nav");
 
-let doctors = []; // will be filled by loadDoctors()
+let doctors = [];
+//every stage will be held here in bookingstage 
 let bookingStage = {
   step: "select",
   doctor: null,
   concern: "",
-  file: null, // uploaded doc
+  file: null, // 
   date: "",
   time: "",
-}; // step: select -> consult -> datetime -> review
+}; // this is how the step will be: select then consult then datetime then review
 
-// fallback sample if fetch fails (keeps example working)
+
 const fallbackDoctors = [
   {
     id: 1,
@@ -53,7 +54,7 @@ async function loadDoctors() {
     doctors = fallbackDoctors;
   }
   bookingStage.step = "select";
-  renderBooking(); // entry point render (we start with step select)
+  renderBooking();
 }
 
 function renderBooking(){
@@ -93,34 +94,31 @@ function renderDoctorsGrid(){
     `;
   });
   html += "</div>";
-  // push markup
   container.innerHTML = html;
 
-  // render nav buttons for this step (Back disabled on first step)
   renderNavButtons({
     backDisabled: true,
     continueDisabled: !bookingStage.doctor,
     continueText: "Continue",
   });
 
-  // attach event listeners AFTER DOM injection
+  // attaching event listeners
   container.querySelectorAll(".doctor-card").forEach((card) => {
     card.addEventListener("click", () => {
       const id = card.dataset.id;
       console.log("Clicked card id:", id, "Doctors:", doctors);
-      // toggle selection: if same -> deselect, else select new
+      
       bookingStage.doctor =
         bookingStage.doctor && bookingStage.doctor.id === id
           ? null
           : doctors.find((d) => d.id === id) || null;
-      console.log("Selected doctor:", bookingStage.doctor); // 👀 see if state updates
-      // re-render grid so that UI reflects updated state (and listeners re-attached)
+      console.log("Selected doctor:", bookingStage.doctor); 
       renderDoctorsGrid();
     });
   });
 }
 
-// 4) reusable nav buttons renderer (back/continue)
+// reusable nav buttons.It will handle back/continue
 function renderNavButtons({ backDisabled = false, continueDisabled = true, continueText = "Continue" } = {}) {
   navContainer.innerHTML = `
     <div class="d-flex justify-content-between mt-4">
@@ -132,7 +130,6 @@ function renderNavButtons({ backDisabled = false, continueDisabled = true, conti
   // Back button behavior
   document.getElementById("back-btn").addEventListener("click", () => {
     if (backDisabled) return;
-    // for select step there is no previous step - but kept generic
     if (bookingStage.step === "consult") {
       bookingStage.step = "select";
     } else if (bookingStage.step === "datetime") {
@@ -146,7 +143,6 @@ function renderNavButtons({ backDisabled = false, continueDisabled = true, conti
   // Continue button behavior
   document.getElementById("continue-btn").addEventListener("click", () => {
     if (continueDisabled) return;
-    // move forward to consult step (we'll implement consult next)
     if (bookingStage.step === "select") {
       bookingStage.step = "consult";
       renderBooking();
@@ -154,7 +150,6 @@ function renderNavButtons({ backDisabled = false, continueDisabled = true, conti
       bookingStage.step = "datetime";
       renderBooking();
     } else if (bookingStage.step === "datetime") {
-      // validate before moving to review
       const date = document.getElementById("dateInput").value;
       const time = document.getElementById("timeInput").value;
 
@@ -168,8 +163,8 @@ function renderNavButtons({ backDisabled = false, continueDisabled = true, conti
       bookingStage.step = "review";
       renderBooking();
     } else if (bookingStage.step === "review") {
-      alert("✅ Booking confirmed!");
-      // reset state
+      alert("Booking confirmed!");
+      // reseting state
       bookingStage = {
         step: "select",
         doctor: null,
@@ -179,8 +174,7 @@ function renderNavButtons({ backDisabled = false, continueDisabled = true, conti
         time: "",
       };
 
-      renderBooking(); // go back to doctor grid
-      // later: submit to backend
+      renderBooking(); 
     }
   });
 }
@@ -211,27 +205,16 @@ function renderConsultationDetails(){
     continueText: "Continue",
   });
 
-  // Save concern text as user types
+  // Saving concern text as user types
   document.getElementById("concern").addEventListener("input", (e) => {
     bookingStage.concern = e.target.value;
   });
 
-  // Save file input
+  // Saving file input
   document.getElementById("file").addEventListener("change", (e) => {
     bookingStage.file = e.target.files[0] || null;
   });
 
-//   // Hook into nav buttons
-//   document.getElementById("back-btn").addEventListener("click", () => {
-//     if (file) bookingStage.file = file; // keep old if no new one chosen
-//     bookingStage.step = "select";
-//     renderBooking();
-//   });
-
-//   document.getElementById("continue-btn").addEventListener("click", () => {
-//     bookingStage.step = "datetime";
-//     renderBooking();
-//   });
 }
 
 function renderDateTimePicker(){
@@ -260,30 +243,6 @@ function renderDateTimePicker(){
     continueText: "Review Booking",
   });
 
-  
-  // Back button
-//   document.getElementById("back-btn").addEventListener("click", () => {
-//     bookingStage.step = "consult";
-//     renderBooking();
-//   });
-
-  // Continue button
-//   document.getElementById("continue-btn").addEventListener("click", () => {
-//     const date = document.getElementById("dateInput").value;
-//     const time = document.getElementById("timeInput").value;
-
-//     if (!date || !time) {
-//       alert("Please select both date and time.");
-//       return;
-//     }
-//     // save into state
-//     bookingStage.date = date;
-//     bookingStage.time = time;
-
-//     // advance step
-//     bookingStage.step = "review";
-//     renderBooking();
-//   });
 }
 
 function renderReview() {
@@ -323,22 +282,15 @@ function renderReview() {
 
   container.innerHTML = html;
 
-  // Render nav with Back and Confirm
+  // Here am Rendering nav with Back and Confirm
   renderNavButtons({
     backDisabled: false,
     continueDisabled: false,
     continueText: "Confirm Booking",
   });
 
-  // Hook up confirm action
-//   document.getElementById("continue-btn").addEventListener("click", () => {
-//     alert("✅ Booking confirmed!\n\n" + JSON.stringify(bookingStage, null, 2));
-//     // later: send bookingStage to backend
-//   });
 }
 
-
-// small helper to avoid XSS in inserted names/titles
 function escapeHtml(str) {
   if (!str) return "";
   return String(str)
@@ -348,5 +300,6 @@ function escapeHtml(str) {
     .replaceAll('"',"&quot;")
     .replaceAll("'", "&#039;");
 }
+
 //init
 loadDoctors()
