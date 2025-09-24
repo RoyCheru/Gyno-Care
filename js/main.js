@@ -14,6 +14,7 @@ let bookingStage = {
 }; // this is how the step will be: select then consult then datetime then review
 
 
+//this fallback is just incase the server fails to fetch doctors. 
 const fallbackDoctors = [
   {
     id: 1,
