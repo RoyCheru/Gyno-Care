@@ -14,45 +14,13 @@ let bookingStage = {
 }; // this is how the step will be: select then consult then datetime then review
 
 
-//this fallback is just incase the server fails to fetch doctors. 
-const fallbackDoctors = [
-  {
-    id: 1,
-    name: "Dr. Jane Doe",
-    title: "Gynecologist",
-    experienceYears: 10,
-    fee: 50,
-    currency: "USD",
-    image: "assets/img/doctor1.jpg",
-  },
-  {
-    id: 2,
-    name: "Dr. Sarah Johnson",
-    title: "Obstetrician",
-    experienceYears: 8,
-    fee: 40,
-    currency: "USD",
-    image: "assets/img/doctor2.jpg",
-  },
-  {
-    id: 3,
-    name: "Dr. Emily Clark",
-    title: "Fertility Specialist",
-    experienceYears: 12,
-    fee: 60,
-    currency: "USD",
-    image: "assets/img/doctor3.jpg",
-  },
-];
-
 async function loadDoctors() {
   try {
     const res = await fetch(doctorsPath);
     if (!res.ok) throw new Error("fetch failed");
     doctors = await res.json();
   } catch (e) {
-    console.warn("Could not fetch doctors.json — using fallback sample.", e);
-    doctors = fallbackDoctors;
+    console.warn("Could not fetch doctors.json", e);
   }
   bookingStage.step = "select";
   renderBooking();
