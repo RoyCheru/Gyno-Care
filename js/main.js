@@ -42,7 +42,8 @@ function renderBooking(){
 }
 
 function renderDoctorsGrid(){
-  let html = '<div class="row g-4">';
+  let html =
+    '<div class="row g-4"> <h3 class="mb-0 text-center">1.Choose Your Specialist</h3> <small class="mt-0 text-center">Select your preferred healthcare provider</small>';
   doctors.forEach((doc) => {
     const selectedClass =
       bookingStage.doctor && bookingStage.doctor.id === doc.id
@@ -156,8 +157,8 @@ function renderConsultationDetails(){
     <div class="card p-4">
       <h5 class="mb-3">Doctor: ${bookingStage.doctor?.name}</h5>
       <div class="mb-3">
-        <label for="concern" class="form-label">Describe your health concern</label>
-        <textarea id="concern" class="form-control" rows="4">${
+        <label for="concern" class="form-label">Description</label>
+        <textarea id="concern" class="form-control" rows="4" placeholder="Please briefly describe your health concern or reason for consulation...">${
           bookingStage.concern || ""
         }</textarea>
       </div>
